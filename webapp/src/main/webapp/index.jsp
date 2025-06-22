@@ -1,37 +1,109 @@
-<form action="action_page.php">
-  <div class="container">
-    <h1>New user Register for DevOps Learning</h1>
-    <p>Please fill in this form to create an account.</p>
-    <hr>
-     
-    <label for="Name"><b>Enter Name</b></label>
-    <input type="text" placeholder="Enter Full Name" name="Name" id="Name" required>
-    <br>
-    
-    <label for="mobile"><b>Enter mobile</b></label>
-    <input type="text" placeholder="Enter moible number" name="mobile" id="mobile" required>
-    <br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cyber Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0a0a0f;
+      color: #00fff7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: radial-gradient(ellipse at center, #0a0a0f 0%, #1a1a2e 100%);
+    }
 
-    <label for="email"><b>Enter Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
-    <br>
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 0 0 10px #00fff7;
+      animation: pulse 2s infinite;
+    }
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-    <br>
+    form {
+      background-color: rgba(20, 20, 40, 0.8);
+      border: 2px solid #00fff7;
+      padding: 2em;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px #00fff7;
+    }
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
-    <hr>
-    <br>
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Register</button>
-  </div>
-  <div class="container signin">
-    <p>Already have an account? <a href="#">Sign in</a>.</p>
-  </div>
+    label {
+      display: block;
+      margin: 1em 0 0.3em;
+      font-weight: bold;
+    }
 
-   <h1> Thankyou, Happy Learning </h1>
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8em;
+      background-color: #121212;
+      color: #00fff7;
+      border: 1px solid #00fff7;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-bottom: 1em;
+    }
 
-  
-</form>
+    button {
+      width: 100%;
+      padding: 0.8em;
+      background-color: transparent;
+      border: 2px solid #00fff7;
+      color: #00fff7;
+      font-size: 1em;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00fff7;
+      color: #0a0a0f;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 2em;
+      font-size: 0.8em;
+      opacity: 0.5;
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 10px #00fff7; }
+      50% { text-shadow: 0 0 20px #00fff7; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Access Protocol</h1>
+  <form>
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your alias">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="neon@grid.net">
+
+    <label for="role">Role</label>
+    <select id="role">
+      <option>Hacker</option>
+      <option>Engineer</option>
+      <option>Strategist</option>
+      <option>Other</option>
+    </select>
+
+    <label for="message">Message</label>
+    <textarea id="message" rows="4" placeholder="Send encrypted data..."></textarea>
+
+    <button type="submit">Transmit</button>
+  </form>
+
+  <footer>&copy; 2025 Rahul's Grid • Secure Channel Initiated</footer>
+</body>
+</html>
