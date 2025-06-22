@@ -1,109 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cyber Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Beast Slayer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
       font-family: 'Orbitron', sans-serif;
-      background-color: #0a0a0f;
-      color: #00fff7;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      background: radial-gradient(ellipse at center, #0a0a0f 0%, #1a1a2e 100%);
+      color: #00fff7;
+    }
+
+    .intro {
+      text-align: center;
+      z-index: 1;
     }
 
     h1 {
-      font-size: 2.5em;
-      text-shadow: 0 0 10px #00fff7;
-      animation: pulse 2s infinite;
+      font-size: 4em;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7;
+      animation: glow 3s ease-in-out infinite;
     }
 
-    form {
-      background-color: rgba(20, 20, 40, 0.8);
-      border: 2px solid #00fff7;
-      padding: 2em;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 20px #00fff7;
+    p {
+      font-size: 1.3em;
+      opacity: 0.85;
+      margin-top: 1em;
     }
 
-    label {
-      display: block;
-      margin: 1em 0 0.3em;
-      font-weight: bold;
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 20px #00fff7, 0 0 40px #00fff7; }
+      50% { text-shadow: 0 0 40px #00fff7, 0 0 80px #00fff7; }
     }
 
-    input, select, textarea {
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
-      padding: 0.8em;
-      background-color: #121212;
-      color: #00fff7;
-      border: 1px solid #00fff7;
-      border-radius: 10px;
-      font-size: 1em;
-      margin-bottom: 1em;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.8em;
-      background-color: transparent;
-      border: 2px solid #00fff7;
-      color: #00fff7;
-      font-size: 1em;
-      border-radius: 10px;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #00fff7;
-      color: #0a0a0f;
-      transform: scale(1.05);
-    }
-
-    footer {
-      margin-top: 2em;
-      font-size: 0.8em;
-      opacity: 0.5;
-    }
-
-    @keyframes pulse {
-      0%, 100% { text-shadow: 0 0 10px #00fff7; }
-      50% { text-shadow: 0 0 20px #00fff7; }
+      height: 100%;
+      z-index: 0;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Access Protocol</h1>
-  <form>
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="Enter your alias">
+  <div class="intro">
+    <h1>Welcome, Beast Slayer!</h1>
+    <p>Initializing access to your digital dominion...</p>
+  </div>
 
-    <label for="email">Email</label>
-    <input type="email" id="email" placeholder="neon@grid.net">
+  <canvas id="particles"></canvas>
 
-    <label for="role">Role</label>
-    <select id="role">
-      <option>Hacker</option>
-      <option>Engineer</option>
-      <option>Strategist</option>
-      <option>Other</option>
-    </select>
+  <script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+    let w, h;
+    let particles = [];
 
-    <label for="message">Message</label>
-    <textarea id="message" rows="4" placeholder="Send encrypted data..."></textarea>
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
 
-    <button type="submit">Transmit</button>
-  </form>
+    window.addEventListener("resize", resize);
+    resize();
 
-  <footer>&copy; 2025 Rahul's Grid • Secure Channel Initiated</footer>
+    class Particle {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.vx = (Math.random() - 0.5) * 0.8;
+        this.vy = (Math.random() - 0.5) * 0.8;
+        this.radius = Math.random() * 2 + 1;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > w) this.vx *= -1;
+        if (this.y < 0 || this.y > h) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#00fff7";
+        ctx.fill();
+      }
+    }
+
+    for (let i = 0; i < 100; i++) {
+      particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
 </body>
 </html>
